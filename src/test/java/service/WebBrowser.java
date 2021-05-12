@@ -4,7 +4,6 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.util.ArrayList;
 
@@ -25,19 +24,12 @@ public enum WebBrowser {
     FIREFOX {
         @Override public WebDriver getDriver() {
             WebDriverManager.firefoxdriver().setup();
-//            DesiredCapabilities capabilities = DesiredCapabilities.firefox();
-//            capabilities.setCapability("marionette", false);
-//            capabilities.setCapability("elementScrollBehavior", 1);
             driver = new FirefoxDriver();
             return driver;
         }
 
         @Override
         public void createNewTab() {
-            //driver.findElement(By.tagName("body")).sendKeys(Keys.CONTROL,"t");
-//            String selectLinkOpenInNewTab = Keys.chord(Keys.CONTROL,"t");
-//            driver.findElement(By.linkText("urlLink")).sendKeys(selectLinkOpenInNewTab);
-
             ((JavascriptExecutor)driver).executeScript("window.open('about:blank','_blank');");
             tabs = new ArrayList<>(driver.getWindowHandles());
         }

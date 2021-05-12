@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+
 public class PricingCalculatorPage extends AbstractPage{
 
 
@@ -25,13 +26,14 @@ public class PricingCalculatorPage extends AbstractPage{
 
     private String operatingSystem = "//md-option[@value='%s']";
 
+    String machineClassDropdownListLocator = "//md-select[@ng-model='listingCtrl.computeServer.class']";
     @FindBy(xpath = "//md-select[@ng-model='listingCtrl.computeServer.class']")
     private WebElement machineClassDropdownList;
 
     private String machineClass = "//div[@class='md-select-menu-container md-active md-clickable']//md-option[@value='%s']";
 
     @FindBy(xpath = "//md-select[@ng-model='listingCtrl.computeServer.series']")
-    private WebElement machineSeriesDropDownList;
+    private WebElement machineSeriesDropdownList;
 
     private String machineSeries = "//md-option[@value='%s']";
 
@@ -95,40 +97,46 @@ public class PricingCalculatorPage extends AbstractPage{
     }
 
     public PricingCalculatorPage selectNumberOfInstances(String instancesCount) {
-        numberOfInstances.sendKeys(instancesCount);
+        waitVisibilityOf(numberOfInstances).sendKeys(instancesCount);
         return this;
     }
 
     public PricingCalculatorPage selectOS(String operatingSystemProperty) {
+        scrollToView(operatingSystemsDropdownList);
         operatingSystemsDropdownList.click();
         waitVisibilityOf(operatingSystem, operatingSystemProperty).click();
         return this;
     }
 
     public PricingCalculatorPage selectMachineClass(String machineClassProperty) {
+        scrollToView(machineClassDropdownList);
         machineClassDropdownList.click();
         waitVisibilityOf(machineClass, machineClassProperty).click();
         return this;
     }
 
     public PricingCalculatorPage selectMachineSeries(String machineSeriesProperty) {
-        machineSeriesDropDownList.click();
+        scrollToView(machineSeriesDropdownList);
+        machineSeriesDropdownList.click();
         waitVisibilityOf(machineSeries, machineSeriesProperty).click();
         return this;
     }
 
     public PricingCalculatorPage selectMachineType(String machineTypeProperty) {
+        scrollToView(machineTypeDropdownList);
         machineTypeDropdownList.click();
         waitVisibilityOf(machineType, machineTypeProperty).click();
         return this;
     }
 
     public PricingCalculatorPage selectAddGPUsCheckbox() {
+        scrollToView(addGPUsCheckbox);
         addGPUsCheckbox.click();
         return this;
     }
 
     public PricingCalculatorPage selectNumberOfGPUs(String numberOfGPUsProperty) {
+        scrollToView(numberOfGPUsDropdownList);
         numberOfGPUsDropdownList.click();
         waitVisibilityOf(numberOfGPUs, numberOfGPUsProperty).click();
         return this;
@@ -141,25 +149,29 @@ public class PricingCalculatorPage extends AbstractPage{
     }
 
     public PricingCalculatorPage selectLocalSSD(String localSSDProperty) {
+        scrollToView(localSSDDropdownList);
         localSSDDropdownList.click();
         waitVisibilityOf(localSSD, localSSDProperty).click();
         return this;
     }
 
     public PricingCalculatorPage selectDatacenterLocation(String datacenterLocationProperty) {
+        scrollToView(datacenterLocationDropdownList);
         datacenterLocationDropdownList.click();
         waitVisibilityOf(datacenterLocation, datacenterLocationProperty).click();
         return this;
     }
 
     public PricingCalculatorPage selectCommittedUsage(String committedUsageProperty) {
+        scrollToView(committedUsageDropdownList);
         committedUsageDropdownList.click();
         waitVisibilityOf(committedUsage, committedUsageProperty).click();
         return this;
     }
 
     public PricingCalculatorPage clickAddToEstimateButton() {
-        waitVisibilityOf(addToEstimateBtn).click();
+        scrollToView(addToEstimateBtn);
+        addToEstimateBtn.click();
         return this;
     }
 
@@ -171,23 +183,28 @@ public class PricingCalculatorPage extends AbstractPage{
     }
 
     public PricingCalculatorPage clickEmailEstimateButton() {
-        waitVisibilityOf(emailEstimateBtn).click();
+        scrollToView(emailEstimateBtn);
+        emailEstimateBtn.click();
         return this;
     }
 
     public PricingCalculatorPage fillEmailField(String mailAddress) {
-        waitVisibilityOf(mailAddressField).sendKeys(mailAddress);
+        scrollToView(mailAddressField);
+        mailAddressField.sendKeys(mailAddress);
         return this;
     }
 
     public PricingCalculatorPage clickSendEmailButton() {
-        waitVisibilityOf(sendEmailBtn).click();
+        scrollToView(sendEmailBtn);
+        sendEmailBtn.click();
         return this;
     }
 
 
     @Override
-    protected PricingCalculatorPage openPage() {
+    public PricingCalculatorPage openPage() {
+        driver.manage().window().maximize();
+        driver.get("https://cloud.google.com/products/calculator");
         return this;
     }
 

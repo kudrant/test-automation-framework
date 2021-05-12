@@ -4,6 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
@@ -39,7 +41,8 @@ public class TenMinutEmailPage extends AbstractPage{
     private WebElement totalEstimatedCostFromEmail;
 
     public String copyMailAddress() {
-        return waitVisibilityOf(mailAddress).getAttribute("value");
+        scrollToView(mailAddress);
+        return waitVisibilityOfEmail(mailAddress).getAttribute("value");
     }
 
     public TenMinutEmailPage openMail() {
@@ -53,7 +56,10 @@ public class TenMinutEmailPage extends AbstractPage{
                 .replaceAll(",", ""));
     }
 
-
-
+    protected WebElement waitVisibilityOfEmail(WebElement element) {
+        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
+                .until(ExpectedConditions.attributeContains(element, "value", "@"));
+        return element;
+    }
 
 }

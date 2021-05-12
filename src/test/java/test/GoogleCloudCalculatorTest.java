@@ -40,10 +40,6 @@ public class GoogleCloudCalculatorTest {
         driver = browser.getDriver();
     }
 
-    public WebBrowser getBrowser() {
-        return browser;
-    }
-
     @Test
     public void checkTotalEstimatedMonthlyCost() {
 
@@ -57,6 +53,8 @@ public class GoogleCloudCalculatorTest {
                 .clickSearchBtn()
                 .searchForPricingCalculator("Google Cloud Platform Pricing Calculator")
                 .goToPricingCalculator();
+
+//
 
         double totalEstimatedMonthlyCost = calculatorPage
                 .goToCalculatorFrame()
