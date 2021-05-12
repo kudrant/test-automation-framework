@@ -9,4 +9,4 @@ What is in the framework:
     xml suites for smoke tests and all tests
     When the test fails, a screenshot with the date and time is saved
     The framework has the ability to run with Jenkins and browser parameterization, test suite, environment.
-    Test results are displayed on the job graph, screenshots are archived as artifacts 
+    Test results are displayed on the job graph, screenshots are archived as artifacts.
