@@ -14,7 +14,6 @@ public enum WebBrowser {
             driver = new ChromeDriver();
             return driver;
         }
-
         @Override
         public void createNewTab() {
             ((JavascriptExecutor)driver).executeScript("window.open()");
@@ -27,7 +26,6 @@ public enum WebBrowser {
             driver = new FirefoxDriver();
             return driver;
         }
-
         @Override
         public void createNewTab() {
             ((JavascriptExecutor)driver).executeScript("window.open('about:blank','_blank');");
@@ -37,7 +35,6 @@ public enum WebBrowser {
 
     private static WebDriver driver;
     private static ArrayList<String> tabs;
-
 
     public abstract WebDriver getDriver();
     public abstract void createNewTab();
@@ -49,8 +46,6 @@ public enum WebBrowser {
     public void openSecondTab() {
         driver.switchTo().window(tabs.get(1));
     }
-
-
 
     public static void closeDriver(){
         driver.quit();

@@ -1,5 +1,7 @@
 package page;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -7,14 +9,9 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.awt.*;
-import java.awt.datatransfer.Clipboard;
-import java.awt.datatransfer.DataFlavor;
-import java.awt.datatransfer.UnsupportedFlavorException;
-import java.io.IOException;
-import java.util.Locale;
 
 public class TenMinutEmailPage extends AbstractPage{
+    private final Logger logger = LogManager.getRootLogger();
     private static final String PAGE_URL = "https://10minutemail.com";
 
     public TenMinutEmailPage(WebDriver driver) {
@@ -47,13 +44,16 @@ public class TenMinutEmailPage extends AbstractPage{
 
     public TenMinutEmailPage openMail() {
         waitVisibilityOf(incomingMail).click();
+        logger.info("Ten Minute Email Page opened");
         return this;
     }
 
     public double getTotalEstimatedMonthlyCostFromEmail() {
-        return Double.parseDouble(totalEstimatedCostFromEmail.getText()
-                .split(" ")[1]
-                .replaceAll(",", ""));
+        double estimatedMonthlyCostFromEmail = Double.parseDouble(totalEstimatedCostFromEmail.getText()
+                                                        .split(" ")[1]
+                                                        .replaceAll(",", ""));
+        logger.info("Total Estimated Monthly Cost received from email");
+        return estimatedMonthlyCostFromEmail;
     }
 
     protected WebElement waitVisibilityOfEmail(WebElement element) {

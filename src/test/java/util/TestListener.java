@@ -6,19 +6,15 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
-import service.WebBrowser;
-import test.GoogleCloudCalculatorTest;
+import test.CommonConditions;
 
 import java.io.File;
 import java.io.IOException;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Locale;
 
 public class TestListener implements ITestListener {
     private Logger log = LogManager.getRootLogger();
@@ -52,9 +48,8 @@ public class TestListener implements ITestListener {
     }
 
     private void saveScreenshot(){
-        File screenCapture = ((TakesScreenshot)WebBrowser.valueOf(System.getProperty("browser").toUpperCase(Locale.ROOT))
-                .getDriver())
-                .getScreenshotAs(OutputType.FILE);
+
+        File screenCapture = ((TakesScreenshot)CommonConditions.getDriver()).getScreenshotAs(OutputType.FILE);
         try {
             FileUtils.copyFile(screenCapture, new File(
                     ".//target/screenshots/"

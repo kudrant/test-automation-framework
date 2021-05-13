@@ -1,5 +1,7 @@
 package page;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -7,7 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 
 
 public class PricingCalculatorPage extends AbstractPage{
-
+    private final Logger logger = LogManager.getRootLogger();
 
     public PricingCalculatorPage(WebDriver driver) {
         super(driver);
@@ -105,6 +107,7 @@ public class PricingCalculatorPage extends AbstractPage{
         scrollToView(operatingSystemsDropdownList);
         operatingSystemsDropdownList.click();
         waitVisibilityOf(operatingSystem, operatingSystemProperty).click();
+        logger.info("Operating system / Software selected");
         return this;
     }
 
@@ -112,6 +115,7 @@ public class PricingCalculatorPage extends AbstractPage{
         scrollToView(machineClassDropdownList);
         machineClassDropdownList.click();
         waitVisibilityOf(machineClass, machineClassProperty).click();
+        logger.info("Machine class selected");
         return this;
     }
 
@@ -119,6 +123,7 @@ public class PricingCalculatorPage extends AbstractPage{
         scrollToView(machineSeriesDropdownList);
         machineSeriesDropdownList.click();
         waitVisibilityOf(machineSeries, machineSeriesProperty).click();
+        logger.info("Machine series selected");
         return this;
     }
 
@@ -126,6 +131,7 @@ public class PricingCalculatorPage extends AbstractPage{
         scrollToView(machineTypeDropdownList);
         machineTypeDropdownList.click();
         waitVisibilityOf(machineType, machineTypeProperty).click();
+        logger.info("Machine type selected");
         return this;
     }
 
@@ -145,6 +151,7 @@ public class PricingCalculatorPage extends AbstractPage{
     public PricingCalculatorPage selectGPUType(String gpuTypeProperty) {
         gpuTypeDropdownList.click();
         waitVisibilityOf(gpuType, gpuTypeProperty).click();
+        logger.info("GPU type selected selected");
         return this;
     }
 
@@ -152,6 +159,7 @@ public class PricingCalculatorPage extends AbstractPage{
         scrollToView(localSSDDropdownList);
         localSSDDropdownList.click();
         waitVisibilityOf(localSSD, localSSDProperty).click();
+        logger.info("Local SSD selected");
         return this;
     }
 
@@ -159,6 +167,7 @@ public class PricingCalculatorPage extends AbstractPage{
         scrollToView(datacenterLocationDropdownList);
         datacenterLocationDropdownList.click();
         waitVisibilityOf(datacenterLocation, datacenterLocationProperty).click();
+        logger.info("Datacenter location selected");
         return this;
     }
 
@@ -176,10 +185,13 @@ public class PricingCalculatorPage extends AbstractPage{
     }
 
     public double getTotalEstimatedMonthlyCost() {
-        return Double.parseDouble(totalEstimatedMonthlyCost.getText()
-                .split("USD ")[1]
-                .replaceAll(",", "")
-                .split(" ")[0]);
+        double monthlyCost = Double.parseDouble(totalEstimatedMonthlyCost.getText()
+                                    .split("USD ")[1]
+                                    .replaceAll(",", "")
+                                    .split(" ")[0]);
+        logger.info("Total estimated monthly cost parsed");
+        return monthlyCost;
+
     }
 
     public PricingCalculatorPage clickEmailEstimateButton() {
@@ -197,6 +209,7 @@ public class PricingCalculatorPage extends AbstractPage{
     public PricingCalculatorPage clickSendEmailButton() {
         scrollToView(sendEmailBtn);
         sendEmailBtn.click();
+        logger.info("Email estimate request sent");
         return this;
     }
 
@@ -205,6 +218,7 @@ public class PricingCalculatorPage extends AbstractPage{
     public PricingCalculatorPage openPage() {
         driver.manage().window().maximize();
         driver.get("https://cloud.google.com/products/calculator");
+        logger.info("Google Cloud Pricing Calculator Page opened");
         return this;
     }
 

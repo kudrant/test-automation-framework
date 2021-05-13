@@ -1,22 +1,14 @@
 package test;
 
-
-import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import page.GoogleCloudPage;
 import page.PricingCalculatorPage;
 import page.TenMinutEmailPage;
 import static service.TestDataReader.getTestData;
-import service.WebBrowser;
-import util.TestListener;
 
 
-@Listeners({TestListener.class})
-public class GoogleCloudCalculatorTest {
+public class GoogleCloudCalculatorTest extends CommonConditions{
 
     public static final String CALC_NUMBER_OF_INSTANCES = "calc.numberOfInstances";
     public static final String CALC_OPERATING_SYSTEM = "calc.operatingSystem";
@@ -28,17 +20,6 @@ public class GoogleCloudCalculatorTest {
     public static final String CALC_LOCAL_SSD = "calc.localSSD";
     public static final String CALC_DATACENTER_LOCATION = "calc.datacenterLocation";
     public static final String CALC_COMMITTED_USAGE = "calc.committedUsage";
-
-    private WebDriver driver;
-    protected WebBrowser browser;
-
-
-    @BeforeMethod()
-    public void setUp()
-    {
-        browser = WebBrowser.valueOf(System.getProperty("browser").toUpperCase());
-        driver = browser.getDriver();
-    }
 
     @Test
     public void checkTotalEstimatedMonthlyCost() {
@@ -53,8 +34,6 @@ public class GoogleCloudCalculatorTest {
                 .clickSearchBtn()
                 .searchForPricingCalculator("Google Cloud Platform Pricing Calculator")
                 .goToPricingCalculator();
-
-//
 
         double totalEstimatedMonthlyCost = calculatorPage
                 .goToCalculatorFrame()
@@ -96,13 +75,5 @@ public class GoogleCloudCalculatorTest {
         double totalEstimatedMonthlyCostFromEmail = mailPage.openMail().getTotalEstimatedMonthlyCostFromEmail();
 
         Assert.assertEquals(totalEstimatedMonthlyCost, totalEstimatedMonthlyCostFromEmail);
-
     }
-
-    @AfterMethod(alwaysRun = true)
-    public void stopBrowser()
-    {
-        WebBrowser.closeDriver();
-    }
-
 }
