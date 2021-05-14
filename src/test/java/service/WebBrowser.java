@@ -12,6 +12,7 @@ public enum WebBrowser {
        @Override public WebDriver getDriver() {
             WebDriverManager.chromedriver().setup();
             driver = new ChromeDriver();
+            driver.manage().window().maximize();
             return driver;
         }
         @Override
@@ -24,6 +25,7 @@ public enum WebBrowser {
         @Override public WebDriver getDriver() {
             WebDriverManager.firefoxdriver().setup();
             driver = new FirefoxDriver();
+            driver.manage().window().maximize();
             return driver;
         }
         @Override

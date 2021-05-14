@@ -27,7 +27,6 @@ public class GoogleCloudPage extends AbstractPage {
     //1. Открыть https://cloud.google.com/
     @Override
     public GoogleCloudPage openPage() {
-        driver.manage().window().maximize();
         driver.get(PAGE_URL);
         logger.info("Google Cloud page opened");
         return this;

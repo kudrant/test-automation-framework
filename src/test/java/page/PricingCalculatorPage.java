@@ -208,7 +208,7 @@ public class PricingCalculatorPage extends AbstractPage{
 
     public PricingCalculatorPage clickSendEmailButton() {
         scrollToView(sendEmailBtn);
-        sendEmailBtn.click();
+        waitVisibilityOf(sendEmailBtn).click();
         logger.info("Email estimate request sent");
         return this;
     }
@@ -216,7 +216,6 @@ public class PricingCalculatorPage extends AbstractPage{
 
     @Override
     public PricingCalculatorPage openPage() {
-        driver.manage().window().maximize();
         driver.get("https://cloud.google.com/products/calculator");
         logger.info("Google Cloud Pricing Calculator Page opened");
         return this;
