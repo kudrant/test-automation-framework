@@ -19,37 +19,39 @@ import java.time.format.DateTimeFormatter;
 public class TestListener implements ITestListener {
     private Logger log = LogManager.getRootLogger();
 
+    @Override
     public void onTestStart(ITestResult iTestResult) {
-
     }
 
+    @Override
     public void onTestSuccess(ITestResult iTestResult) {
 
     }
 
+    @Override
     public void onTestFailure(ITestResult iTestResult) {
         saveScreenshot();
     }
 
+    @Override
     public void onTestSkipped(ITestResult iTestResult) {
-
     }
 
+    @Override
     public void onTestFailedButWithinSuccessPercentage(ITestResult iTestResult) {
-
     }
 
+    @Override
     public void onStart(ITestContext iTestContext) {
-
     }
 
+    @Override
     public void onFinish(ITestContext iTestContext) {
-
     }
 
-    private void saveScreenshot(){
+    private void saveScreenshot() {
 
-        File screenCapture = ((TakesScreenshot)CommonConditions.getDriver()).getScreenshotAs(OutputType.FILE);
+        File screenCapture = ((TakesScreenshot) CommonConditions.getDriver()).getScreenshotAs(OutputType.FILE);
         try {
             FileUtils.copyFile(screenCapture, new File(
                     ".//target/screenshots/"
@@ -60,8 +62,8 @@ public class TestListener implements ITestListener {
         }
     }
 
-    private String getCurrentTimeAsString(){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern( "uuuu-MM-dd_HH-mm-ss" );
+    private String getCurrentTimeAsString() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu-MM-dd_HH-mm-ss");
         return ZonedDateTime.now().format(formatter);
     }
 }

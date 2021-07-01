@@ -60,7 +60,7 @@ public class PricingCalculatorPage extends AbstractPage{
     @FindBy(xpath = "//md-select[@ng-model='listingCtrl.computeServer.ssd']")
     private WebElement localSSDDropdownList;
 
-    private String localSSD = "//md-option[@ng-repeat='item in listingCtrl.supportedSsd'][@value='%s']";
+    private String localSSD = "//md-option[@ng-repeat='item in listingCtrl.dynamicSsd.computeServer'][@value='%s']";
 
     @FindBy(xpath = "//md-select[@ng-model='listingCtrl.computeServer.location']")
     private WebElement datacenterLocationDropdownList;
